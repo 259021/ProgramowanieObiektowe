@@ -1,7 +1,7 @@
 #define MENU_H
-
+#include <iostream>
 
 class Menu {
 public:
-    void Show();
+    static void Show();
 };

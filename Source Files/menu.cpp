@@ -1,8 +1,6 @@
-
 #include "menu.h"
 
-
-void MENU::Show() {
+void Menu::Show() {
     std::cout << "Hello, World!" << std::endl;
 }
 
