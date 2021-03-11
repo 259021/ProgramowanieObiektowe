@@ -1,8 +1,8 @@
 #include <iostream>
 #include "menu.h"
+#include "ncurses.h"
 int main() {
 
-    Menu menu = Menu();
-    menu.Show();
+    initscr();
     return 0;
 }
