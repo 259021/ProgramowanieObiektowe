@@ -8,7 +8,7 @@ find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 #add_library(OwnExcelLibs "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/menu.cpp")
 
-add_executable(OwnExcel "Source Files/main.cpp" "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/menu.cpp")
+add_executable(OwnExcel "Source Files/main.cpp" "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/menu.cpp" Models/Identifier.cpp Models/Identifier.h)
 
 target_link_libraries(OwnExcel ${CURSES_LIBRARIES})
 

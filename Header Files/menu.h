@@ -1,7 +1,7 @@
-#define MENU_H
+#define OWNEXCEL_MENU_H
 #include <iostream>
 
 class Menu {
 public:
-    static void Show();
+    void Show();
 };
