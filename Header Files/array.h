@@ -4,6 +4,7 @@
 
 class Array {
 public:
+
     int columns = 1;
     int lines = 1;
     float** sheet;
