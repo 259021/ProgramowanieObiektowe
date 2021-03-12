@@ -4,21 +4,37 @@
 
 class Array {
 public:
-
-    int columns = 1;
-    int lines = 1;
+    int sheetColumns;
+    int sheetRows;
     float** sheet;
-    Array(){
+    Array(int columns, int rows){
+        sheetColumns = columns;
+        sheetRows = rows;
         sheet = new float*[columns];
         for(int i = 0; i < columns; i++) {
-            sheet[i] = new float[lines];
+            sheet[i] = new float[rows];
         }
+
+        //pass test data
+        for(int i = 0; i < columns; ++i)
+            for(int j = 0; j < rows; ++j)
+                sheet[i][j] = i;
     }
-    float Sum(Identifier *identifiers, int length);
+    //Calculate
+    float sum(Identifier *identifiers, int length);
     float subtract(Identifier minued, Identifier subtrahend);
     float divide(Identifier divisor, Identifier dividend);
     float multiplication(Identifier *identifiers, int length);
     float average(Identifier *identifiers, int length);
-    float changeValue(Identifier identifier, float value);
-    bool changeSheetSize(int columns, int lines);
+
+
+    //Operations on sheet
+    bool changeValue(Identifier identifier, float value);
+    bool resizeSheet(int columns, int lines);
+    float getNumberFromSheet(Identifier identifier);
+    bool writeNumberToSheet(float number, int column, int row);
+    bool saveDataToFile();
+    bool LoadDataFromFile();
+
+
 };

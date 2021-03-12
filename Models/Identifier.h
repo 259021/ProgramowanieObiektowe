@@ -7,8 +7,9 @@
 
 
 class Identifier {
-int column;
-int line;
+public:
+    int column;
+    int row;
 };
 
 
