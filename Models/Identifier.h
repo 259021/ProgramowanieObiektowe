@@ -7,6 +7,10 @@
 
 
 class Identifier {
+    /*
+     * /brief This model helps identifier position of single value in sheet.
+     *
+     */
 public:
     int column;
     int row;

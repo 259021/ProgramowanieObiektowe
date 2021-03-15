@@ -3,8 +3,10 @@
 
 
   void Menu::Show() {
-      initscr();
 
+
+
+      initscr();
       // creating a window;
       // with height = 15 and width = 10
       // also with start x axis 10 and start y axis = 20
