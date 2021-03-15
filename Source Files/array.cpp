@@ -1,5 +1,7 @@
-#include <exception>
+#include <stdexcept>
+#include <string>
 #include "array.h"
+
 
 int columns;
 int rows;
@@ -27,7 +29,7 @@ float Array::divide(Identifier divisor, Identifier dividend) {
         return first / second;
     }
     else {
-        return 0; // TODO: maybe some error handling?
+        throw std::runtime_error("Math error: Attempted to divide by Zero\n");
     }
 }
 
@@ -49,17 +51,12 @@ float Array::average(Identifier *identifiers, int length) {
     return sum / length;
 }
 
-bool Array::changeValue(Identifier identifier, float value) {
-    try {
+void Array::changeValue(Identifier identifier, float value) {
+        checkIdentifier(identifier);
         sheet[identifier.column][identifier.row] = value;
-    } catch (std::exception & exception) {
-        return false;
-    }
-    return true;
 }
 
-bool Array::resizeSheet(int columns, int rows) {
-    //TODO: Add Error handling
+void Array::resizeSheet(int columns, int rows) {
     //create new Sheet
     float** newSheet = new float*[columns];
     for(int i = 0; i < columns; i++) {
@@ -78,10 +75,10 @@ bool Array::resizeSheet(int columns, int rows) {
     }
     // change sheets
     sheet = newSheet;
-    return true;
 }
 
 float Array::getNumberFromSheet(Identifier identifier) {
+    checkIdentifier(identifier);
     float val;
     try {
         val = sheet[identifier.column][identifier.row];
@@ -91,21 +88,20 @@ float Array::getNumberFromSheet(Identifier identifier) {
     return val;
 }
 
-bool Array::writeNumberToSheet(float number, int column, int row) {
-    try {
-        sheet[column][row] = number;
-    } catch(std::exception & exception) {
-      return false;
-    }
-    return true;
-}
-
 bool Array::saveDataToFile() {
     return false;
 }
 
 bool Array::LoadDataFromFile() {
     return false;
+}
+
+void Array::checkIdentifier(Identifier identifier) {
+    if (identifier.column > sheetColumns && identifier.row > sheetRows) {
+        throw std::out_of_range(std::string("There is no cell at [" +
+                                            std::to_string(identifier.column) +
+                                            "][" + std::to_string(identifier.row) + "] in sheet. \n"));
+    }
 }
 
 
