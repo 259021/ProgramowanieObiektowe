@@ -6,10 +6,11 @@
      * \brief This is a class handling all operations on sheet.
      */
 class Array {
-public:
+
+private:
     /**
-     * \param this variable store actual number of columns in sheet
-     */
+    * \param this variable store actual number of columns in sheet
+    */
     int sheetColumns;
     /**
      * \param this variable store actual number of rows in sheet
@@ -19,6 +20,8 @@ public:
      * \param this variable store sheet using float array of arrays
      */
     float** sheet;
+public:
+
     /**
      * \brief Constructor of class
      *
