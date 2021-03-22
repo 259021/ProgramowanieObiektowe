@@ -3,6 +3,7 @@
 #include "array.h"
 
 
+
 int columns;
 int rows;
 float** sheet;
@@ -71,8 +72,8 @@ void Array::resizeSheet(int columns, int rows) {
     //delete old sheet from memory
     for(int i = 0; i < sheetColumns; ++i) {
         delete [] sheet[i];
-        delete [] sheet;
     }
+    delete [] sheet;
     // change sheets
     sheet = newSheet;
 }
@@ -92,18 +93,39 @@ void Array::saveDataToFile() {
     std::ofstream save("array.txt");
     save << to_string(sheetRows) << endl;
     save << to_string(sheetColumns) << endl;
-    for(int i = 0; i <= sheetRows; ++i) {
-        for(int x = 0; x <= sheetColumns; ++x) {
+    for(int i = 1; i <= sheetRows; ++i) {
+        for(int x = 1; x <= sheetColumns; ++x) {
             Identifier id = Identifier(x, i);
-            save << to_string(getNumberFromSheet(id)) << ", ";
+            save << to_string(getNumberFromSheet(id)) << " ";
         }
         save << endl;
     }
     save.close();
 }
 
-void Array::LoadDataFromFile() {
+void Array::loadDataFromFile() {
+    ifstream infile("array.txt");
+    string line;
+    int columns = 0, rows = 0, i = 0;
 
+    while (getline(infile, line)){
+        if(i == 0){
+            rows = stoi(line);
+        }
+        else if(i == 1){
+            columns = stoi(line);
+            resizeSheet(columns, rows);
+        }
+        else {
+            istringstream iss(line);
+            for (int x = 0; x < columns; x++){
+                string val;
+                iss >> val;
+                sheet[x][i-2] = stof(val);
+            }
+        }
+        i++;
+    }
 }
 
 void Array::checkIdentifier(Identifier identifier) {

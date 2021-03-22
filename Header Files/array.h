@@ -3,6 +3,7 @@
 #include "../Models/Identifier.h"
 #include "fstream"
 #include "iostream"
+#include "sstream"
 
     /**
      * \brief This is a class handling all operations on sheet.
@@ -42,7 +43,12 @@ public:
             for(int j = 0; j < rows; ++j)
                 sheet[i][j] = i;
 
-            saveDataToFile();
+            //MARK: - PLAYGROUND -
+            //saveDataToFile();
+
+            //loadDataFromFile();
+            //float a = sheet[3][1];
+            //float b = a;
     }
     /**
      * \brief func that return sum of values depends on each one position in sheet and returns result.
@@ -105,7 +111,7 @@ public:
     /**
      * \brief func that load data from file (NOT IMPLEMENTED)
      */
-    void LoadDataFromFile();
+    void loadDataFromFile();
 
 private:
     /**

@@ -15,8 +15,8 @@ public:
     int Column;
     int Row;
     Identifier(int column, int row){
-        Column = column;
-        Row = row;
+        Column = column - 1;
+        Row = row - 1;
     }
 };
 
