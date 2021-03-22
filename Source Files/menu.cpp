@@ -1,10 +1,12 @@
 #include "menu.h"
 #include "ncurses.h"
 
+#include "array.h"
+
 
   void Menu::Show() {
 
-
+    Array arr = Array(4, 2);
 
       initscr();
       // creating a window;

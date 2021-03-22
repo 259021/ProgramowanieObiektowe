@@ -1,12 +1,13 @@
 #define OWNEXCEL_ARRAY_H
 
 #include "../Models/Identifier.h"
+#include "fstream"
+#include "iostream"
 
     /**
      * \brief This is a class handling all operations on sheet.
      */
 class Array {
-
 private:
     /**
     * \param this variable store actual number of columns in sheet
@@ -40,6 +41,8 @@ public:
         for(int i = 0; i < columns; ++i)
             for(int j = 0; j < rows; ++j)
                 sheet[i][j] = i;
+
+            saveDataToFile();
     }
     /**
      * \brief func that return sum of values depends on each one position in sheet and returns result.
@@ -98,11 +101,11 @@ public:
     /**
      * \brief func that save data from array to file (NOT IMPLEMENTED)
      */
-    bool saveDataToFile();
+    void saveDataToFile();
     /**
      * \brief func that load data from file (NOT IMPLEMENTED)
      */
-    bool LoadDataFromFile();
+    void LoadDataFromFile();
 
 private:
     /**

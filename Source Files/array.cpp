@@ -53,7 +53,7 @@ float Array::average(Identifier *identifiers, int length) {
 
 void Array::changeValue(Identifier identifier, float value) {
         checkIdentifier(identifier);
-        sheet[identifier.column][identifier.row] = value;
+        sheet[identifier.Column][identifier.Row] = value;
 }
 
 void Array::resizeSheet(int columns, int rows) {
@@ -81,26 +81,36 @@ float Array::getNumberFromSheet(Identifier identifier) {
     checkIdentifier(identifier);
     float val;
     try {
-        val = sheet[identifier.column][identifier.row];
+        val = sheet[identifier.Column][identifier.Row];
     } catch(std::exception & exception) {
         return 0;
     }
     return val;
 }
-
-bool Array::saveDataToFile() {
-    return false;
+using namespace std;
+void Array::saveDataToFile() {
+    std::ofstream save("array.txt");
+    save << to_string(sheetRows) << endl;
+    save << to_string(sheetColumns) << endl;
+    for(int i = 0; i <= sheetRows; ++i) {
+        for(int x = 0; x <= sheetColumns; ++x) {
+            Identifier id = Identifier(x, i);
+            save << to_string(getNumberFromSheet(id)) << ", ";
+        }
+        save << endl;
+    }
+    save.close();
 }
 
-bool Array::LoadDataFromFile() {
-    return false;
+void Array::LoadDataFromFile() {
+
 }
 
 void Array::checkIdentifier(Identifier identifier) {
-    if (identifier.column > sheetColumns && identifier.row > sheetRows) {
+    if (identifier.Column > sheetColumns && identifier.Row > sheetRows) {
         throw std::out_of_range(std::string("There is no cell at [" +
-                                            std::to_string(identifier.column) +
-                                            "][" + std::to_string(identifier.row) + "] in sheet. \n"));
+                                            std::to_string(identifier.Column) +
+                                            "][" + std::to_string(identifier.Row) + "] in sheet. \n"));
     }
 }
 

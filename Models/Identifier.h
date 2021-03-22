@@ -12,8 +12,12 @@ class Identifier {
      *
      */
 public:
-    int column;
-    int row;
+    int Column;
+    int Row;
+    Identifier(int column, int row){
+        Column = column;
+        Row = row;
+    }
 };
 
 
