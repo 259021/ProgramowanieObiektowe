@@ -54,6 +54,7 @@ public:
      * \brief func that return sum of values depends on each one position in sheet and returns result.
      * @param[in] identifiers - array that holds position of cells.
      * @param[in] length - holds length of identifiers array
+     * @return - float value or exception
      */
     float sum(Identifier *identifiers, int length);
     /**
@@ -106,10 +107,12 @@ public:
     float getNumberFromSheet(Identifier identifier);
     /**
      * \brief func that save data from array to file (NOT IMPLEMENTED)
+     * @return - nothing
      */
     void saveDataToFile();
     /**
      * \brief func that load data from file (NOT IMPLEMENTED)
+     * @return - nothing
      */
     void loadDataFromFile();
 
@@ -117,6 +120,7 @@ private:
     /**
      * func that check if identifier isn't out of bounds.
      * @param identifier - holds cell position.
+     * @return - nothing or exception
      */
     void checkIdentifier(Identifier identifier);
 };
