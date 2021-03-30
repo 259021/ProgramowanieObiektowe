@@ -5,12 +5,13 @@ include_directories("Source Files")
 include_directories("Header Files")
 
 find_package(Curses REQUIRED)
+find_library(MENU_LIBRARY menu)
 
 include_directories(${CURSES_INCLUDE_DIR})
 
-add_executable(OwnExcel "Source Files/main.cpp" "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/menu.cpp" Models/Identifier.cpp Models/Identifier.h)
+add_executable(OwnExcel "Source Files/main.cpp" "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/sheet.cpp" Models/Identifier.cpp Models/Identifier.h)
 
-target_link_libraries(OwnExcel ${CURSES_LIBRARIES})
+target_link_libraries(OwnExcel ${MENU_LIBRARY} ${CURSES_LIBRARIES})
 
 option(BUILD_DOC "Build documentation" ON)
 

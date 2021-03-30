@@ -1,8 +1,8 @@
-#include "menu.h"
+#include "sheet.h"
 
 int main() {
 
-    Menu menu = Menu();
+    Sheet menu = Sheet();
     menu.Show();
     return 0;
 }
