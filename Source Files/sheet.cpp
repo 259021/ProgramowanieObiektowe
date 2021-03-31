@@ -28,6 +28,7 @@
       start_color();
       cbreak();
       noecho();
+      curs_set(0);
       keypad(stdscr, TRUE);
       init_pair(1, COLOR_RED, COLOR_BLACK);
       init_pair(2, COLOR_CYAN, COLOR_BLACK);
@@ -45,7 +46,6 @@
       menu_opts_off(my_menu, O_SHOWDESC);
 
       /* Create the window to be associated with the menu */
-      //my_menu_win = newwin(10, 70, 4, 4);
       my_menu_win = newwin((int)(1.3*arr.rows()), 10*arr.columns(), 7, 10);
       keypad(my_menu_win, TRUE);
 
