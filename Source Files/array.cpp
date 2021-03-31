@@ -146,7 +146,10 @@ int Array::rows() {
 
 
 std::string Array::getNumberAsString(Identifier identifier) {
-    return to_string(getNumberFromSheet(identifier));
+    float val = (getNumberFromSheet(identifier));
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2) << val;
+    return stream.str();
 }
 
 

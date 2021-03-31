@@ -6,7 +6,7 @@
 
   void Sheet::Show() {
 
-      Array arr = Array(12,12);
+      Array arr = Array(14,25); // ColMax = 14
       //arr.saveDataToFile();
       //arr.loadDataFromFile();
       std::string choices[arr.columns()*arr.rows()];
@@ -45,13 +45,13 @@
       menu_opts_off(my_menu, O_SHOWDESC);
 
       /* Create the window to be associated with the menu */
-      my_menu_win = newwin(10, 70, 4, 4);
-
+      //my_menu_win = newwin(10, 70, 4, 4);
+      my_menu_win = newwin((int)(1.3*arr.rows()), 10*arr.columns(), 7, 10);
       keypad(my_menu_win, TRUE);
 
       /* Set main window and sub window */
       set_menu_win(my_menu, my_menu_win);
-      set_menu_sub(my_menu, derwin(my_menu_win, 6, 68, 3, 1));
+      set_menu_sub(my_menu, derwin(my_menu_win, 1*arr.rows(), 9*arr.columns(), 3, 1));
       set_menu_format(my_menu, arr.rows(), arr.columns());
       set_menu_mark(my_menu, " * ");
 
