@@ -1,21 +1,22 @@
 #include "sheet.h"
 #include "array.h"
-
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define CTRLD 	4
 
-char *choices[] = {
-        "Choice 1", "Choice 2", "Choice 3", "Choice 4", "Choice 5",
-        "Choice 6", "Choice 7", "Choice 8", "Choice 9", "Choice 10",
-        "Choice 11", "Choice 12", "Choice 13", "Choice 14", "Choice 15",
-        "Choice 16", "Choice 17", "Choice 18", "Choice 19", "Choice 20",
-        "Exit",
-        (char *)NULL,
-};
 
   void Sheet::Show() {
 
-    Array arr = Array(4, 2);
+      Array arr = Array(12,12);
+      //arr.saveDataToFile();
+      //arr.loadDataFromFile();
+      std::string choices[arr.columns()*arr.rows()];
+      int x = 0;
+      for (int i = 0; i < arr.rows(); i++) {
+          for (int j = 0; j < arr.columns(); j++) {
+              choices[x] = arr.getNumberAsString(Identifier(j+1,i+1));
+              x++;
+          }
+      }
       ITEM **my_items;
       int c;
       MENU *my_menu;
@@ -35,7 +36,7 @@ char *choices[] = {
       n_choices = ARRAY_SIZE(choices);
       my_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
       for(i = 0; i < n_choices; ++i)
-          my_items[i] = new_item(choices[i], choices[i]);
+          my_items[i] = new_item(choices[i].c_str(), choices[i].c_str());
 
       /* Crate menu */
       my_menu = new_menu((ITEM **)my_items);
@@ -45,12 +46,13 @@ char *choices[] = {
 
       /* Create the window to be associated with the menu */
       my_menu_win = newwin(10, 70, 4, 4);
+
       keypad(my_menu_win, TRUE);
 
       /* Set main window and sub window */
       set_menu_win(my_menu, my_menu_win);
       set_menu_sub(my_menu, derwin(my_menu_win, 6, 68, 3, 1));
-      set_menu_format(my_menu, 5, 3);
+      set_menu_format(my_menu, arr.rows(), arr.columns());
       set_menu_mark(my_menu, " * ");
 
       /* Print a border around the main window and print a title */
@@ -96,6 +98,7 @@ char *choices[] = {
       for(i = 0; i < n_choices; ++i)
           free_item(my_items[i]);
       endwin();
+  }
 
-}
+
 

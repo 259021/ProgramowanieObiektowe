@@ -136,4 +136,17 @@ void Array::checkIdentifier(Identifier identifier) {
     }
 }
 
+int Array::columns() {
+    return sheetColumns;
+}
+
+int Array::rows() {
+    return sheetRows;
+}
+
+
+std::string Array::getNumberAsString(Identifier identifier) {
+    return to_string(getNumberFromSheet(identifier));
+}
+
 

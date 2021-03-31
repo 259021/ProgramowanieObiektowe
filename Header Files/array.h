@@ -24,6 +24,9 @@ private:
     float** sheet;
 public:
 
+
+
+
     /**
      * \brief Constructor of class
      *
@@ -41,7 +44,7 @@ public:
         //pass test data
         for(int i = 0; i < columns; ++i)
             for(int j = 0; j < rows; ++j)
-                sheet[i][j] = i;
+                sheet[i][j] = i+12;
 
             //MARK: - PLAYGROUND -
             //saveDataToFile();
@@ -50,6 +53,22 @@ public:
             //float a = sheet[3][1];
             //float b = a;
     }
+
+    /**
+     *
+     * @return numbers of columns
+     */
+    int columns();
+    /**
+     *
+     * @return number of rows
+     */
+    int rows();
+    /**
+     *
+     * @return numbers in sheet in single dimension array of chars
+     */
+    char* sheetAsChars();
     /**
      * \brief func that return sum of values depends on each one position in sheet and returns result.
      * @param[in] identifiers - array that holds position of cells.
@@ -105,6 +124,12 @@ public:
      * @return return nothing or exception
      */
     float getNumberFromSheet(Identifier identifier);
+    /**
+     *
+     * @param identifier - position of cell that value func gonna return.
+     * @return number as string value
+     */
+    std::string getNumberAsString(Identifier identifier);
     /**
      * \brief func that save data from array to file (NOT IMPLEMENTED)
      * @return - nothing
