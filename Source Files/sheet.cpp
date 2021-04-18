@@ -8,7 +8,7 @@
 
       Array arr = Array(14,25); // ColMax = 14
       //arr.saveDataToFile();
-      //arr.loadDataFromFile();
+      arr.loadDataFromFile();
       std::string choices[arr.columns()*arr.rows()];
       int x = 0;
       for (int i = 0; i < arr.rows(); i++) {

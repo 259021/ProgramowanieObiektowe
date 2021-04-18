@@ -2,11 +2,10 @@ project(OwnExcel)
 cmake_minimum_required(VERSION 3.16)
 
 #macos setup start
-include_directories(/usr/local/opt/ncurses/include)
-
-link_directories(/usr/local/opt/ncurses/lib)
-#add_executable(OwnExcel main.c)
-
+if (APPLE)
+    include_directories(/usr/local/opt/ncurses/include)
+    link_directories(/usr/local/opt/ncurses/lib)
+endif ()
 #macos setup end
 
 
@@ -19,10 +18,16 @@ find_library(MENU_LIBRARY menu)
 include_directories(${CURSES_INCLUDE_DIR})
 
 add_executable(OwnExcel "Source Files/main.cpp" "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/sheet.cpp" Models/Identifier.cpp Models/Identifier.h)
+#Linux configuration start (comment out at macos)
+if(UNIX AND NOT APPLE)
+    target_link_libraries(OwnExcel ${MENU_LIBRARY} ${CURSES_LIBRARIES})
+endif()
+#linux configuration end
 
-target_link_libraries(OwnExcel ${MENU_LIBRARY} ${CURSES_LIBRARIES})
 #Macos setup changes
-target_link_libraries(OwnExcel menu ncurses)
+if(APPLE)
+    target_link_libraries(OwnExcel menu ncurses)
+endif()
 #Macos setup changes
 option(BUILD_DOC "Build documentation" ON)
 
