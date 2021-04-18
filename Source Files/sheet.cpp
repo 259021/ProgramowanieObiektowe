@@ -39,7 +39,7 @@
       for(i = 0; i < n_choices; ++i)
           my_items[i] = new_item(choices[i].c_str(), choices[i].c_str());
 
-      /* Crate menu */
+      /* Create menu */
       my_menu = new_menu((ITEM **)my_items);
 
       /* Set menu option not to show the description */

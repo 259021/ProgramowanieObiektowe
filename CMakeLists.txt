@@ -1,6 +1,15 @@
 project(OwnExcel)
 cmake_minimum_required(VERSION 3.16)
 
+#macos setup start
+include_directories(/usr/local/opt/ncurses/include)
+
+link_directories(/usr/local/opt/ncurses/lib)
+#add_executable(OwnExcel main.c)
+
+#macos setup end
+
+
 include_directories("Source Files")
 include_directories("Header Files")
 
@@ -12,7 +21,9 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable(OwnExcel "Source Files/main.cpp" "Source Files/array.cpp" "Source Files/array_display.cpp" "Source Files/sheet.cpp" Models/Identifier.cpp Models/Identifier.h)
 
 target_link_libraries(OwnExcel ${MENU_LIBRARY} ${CURSES_LIBRARIES})
-
+#Macos setup changes
+target_link_libraries(OwnExcel menu ncurses)
+#Macos setup changes
 option(BUILD_DOC "Build documentation" ON)
 
 # check if Doxygen is installed
