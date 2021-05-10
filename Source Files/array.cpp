@@ -2,8 +2,6 @@
 #include <string>
 #include "array.h"
 
-
-
 int columns;
 int rows;
 float** sheet;
@@ -143,7 +141,6 @@ int Array::columns() {
 int Array::rows() {
     return sheetRows;
 }
-
 
 std::string Array::getNumberAsString(Identifier identifier) {
     float val = (getNumberFromSheet(identifier));

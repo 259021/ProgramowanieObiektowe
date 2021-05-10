@@ -5,8 +5,6 @@
 #include "iostream"
 #include "sstream"
 #include <iomanip>
-
-
     /**
      * \brief This is a class handling all operations on sheet.
      */
@@ -25,10 +23,6 @@ private:
      */
     float** sheet;
 public:
-
-
-
-
     /**
      * \brief Constructor of class
      *
@@ -46,14 +40,7 @@ public:
         //pass test data
         for(int i = 0; i < columns; ++i)
             for(int j = 0; j < rows; ++j)
-                sheet[i][j] = i+12;
-
-            //MARK: - PLAYGROUND -
-            //saveDataToFile();
-
-            //loadDataFromFile();
-            //float a = sheet[3][1];
-            //float b = a;
+                sheet[i][j] = 0;
     }
 
     /**

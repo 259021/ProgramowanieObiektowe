@@ -18,6 +18,10 @@ public:
         Column = column - 1;
         Row = row - 1;
     }
+    Identifier() {
+        Column = 0;
+        Row = 0;
+    }
 };
 
 
