@@ -79,10 +79,12 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
         }
         case save: {
             arr->saveDataToFile();
+            Menu::alert("Data saved to file.");
             break;
         }
         case load: {
             arr->loadDataFromFile();
+            Menu::alert("Data loaded from file.");
             break;
         }
         case changeValue: {
@@ -92,7 +94,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
             break;
         }
         case noAction: {
-            Menu::error("No proper action selected!");
+            //Menu::alert("No proper action selected!");
             break;
         }
         case exitCode: {

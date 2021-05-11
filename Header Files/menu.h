@@ -40,16 +40,21 @@ public:
     */
     static void message(const std::string& message);
     /**
-    * \brief func that send error message to user.
+    * \brief func that send alert message to user.
     * @param[in] message - message to user.
     * @return return void
     */
-    static void error(const std::string& message);
+    static void alert(const std::string& message);
     /**
     * \brief func that getch char without waiting for enter
     * source: https://cboard.cprogramming.com/faq-board/27714-faq-there-getch-conio-equivalent-linux-unix.html
     * @return return int value of char
     */
     static int getch();
+    /**
+    * \brief func that clear console
+    * @return void
+    */
+    static void clear();
 };
 #endif

@@ -43,6 +43,19 @@ public:
             for(int j = 0; j < rows; ++j)
                 sheet[i][j] = 0;
     }
+    Array(){
+        sheetColumns = 4;
+        sheetRows = 4;
+        sheet = new float*[sheetColumns];
+        for(int i = 0; i < sheetColumns; i++) {
+            sheet[i] = new float[sheetRows];
+        }
+
+        //pass test data
+        for(int i = 0; i < sheetColumns; ++i)
+            for(int j = 0; j < sheetRows; ++j)
+                sheet[i][j] = 0;
+    }
 
     /**
      *
@@ -130,7 +143,10 @@ public:
      * @return - nothing
      */
     void loadDataFromFile();
-
+     /**
+     * func search max value stored in sheet.
+     * @return - max value as float
+     */
     float getMaxValue();
 
 private:

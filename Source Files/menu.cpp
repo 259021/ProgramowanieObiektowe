@@ -4,16 +4,18 @@
 using namespace std;
 
 Operations Menu::showFunctions() {
-    cout << "Press + to invoke adding cells\n";
-    cout << "Press - to invoke subtraction cells\n";
-    cout << "Press * to invoke multiplication cells\n";
-    cout << "Press / to invoke dividing cells\n";
-    cout << "Press = to change cell values\n";
-    cout << "Press s save sheet to file\n";
-    cout << "Press l sheet from file\n";
-    cout << "Press F3 to invoke average value of cells\n";
-    cout << "Press F2 to resize sheet\n";;
-    cout << "Press F1 exit";
+    cout << endl;
+    cout << "Press \'+\' to invoke adding cells\n";
+    cout << "Press \'-\' to invoke subtraction cells\n";
+    cout << "Press \'*\' to invoke multiplication cells\n";
+    cout << "Press \'/\' to invoke dividing cells\n";
+    cout << "Press \'c\' to change cell values\n";
+    cout << "Press \'s\' save sheet to file\n";
+    cout << "Press \'l\' sheet from file\n";
+    cout << "Press \'a\' to invoke average value of cells\n";
+    cout << "Press \'r\' to resize sheet\n";;
+    cout << "Press \'e\' exit";
+    cout << endl;
 
     int c = getch();
     switch (c) {
@@ -25,11 +27,13 @@ Operations Menu::showFunctions() {
             return  Operations::multiplication;
         case '/':
             return  Operations::divide;
-        case -122:
+        case 'c':
+            return Operations::changeValue;
+        case 'e':
             return  Operations::exitCode;
-        case -120:
+        case 'r':
             return  Operations::resize;
-        case -99:
+        case 'a':
             return  Operations::average;
         case 's':
             return Operations::save;
@@ -52,7 +56,7 @@ float Menu::getNumber(const string& message) {
             properValue = true;
         }
         catch(...) {
-            error("Write proper value!");
+            alert("Write proper value!");
             properValue = false;
         };
     }
@@ -66,7 +70,7 @@ Identifier Menu::getIdentifier(const string& message) {
     while(!properValue){
         cout << message << endl;
         try {
-            cout << "column:";
+            cout << "column: ";
             cin >> col;
             cout << "row: ";
             cin >> row;
@@ -85,8 +89,9 @@ void Menu::message(const string& message) {
     cout << message << endl;
 }
 
-void Menu::error(const string& message) {
+void Menu::alert(const string& message) {
     cout << "\033[1;31m" << message << "\033[0m\n";
+    sleep(2);
 }
 int Menu::getch() {
         struct termios oldt{},
@@ -102,3 +107,6 @@ int Menu::getch() {
 }
 
 
+void Menu::clear() {
+    system("clear");
+}

@@ -5,7 +5,7 @@
 
 int main() {
     //MARK: - Create instances of classes -
-    Array arr = Array(14, 15);
+    Array arr = Array();
     ArrayDisplay sheet = ArrayDisplay();
     int exit = 0;
 
@@ -21,15 +21,20 @@ int main() {
 
     //MARK: - Main loop -
     while(exit != -1) {
+        Menu::clear();
         sheet.Display(arr);
         Operations operation = Menu::showFunctions();
         try {
             exit = OperationHandler::decimalOperation(operation, &arr);
         }
         catch(const std::exception& exception) {
-            Menu::error(exception.what());
-            Menu::message("Press any key to continue...");
-            Menu::getch();
+            Menu::alert(exception.what());
+        }
+        catch(const std::runtime_error& exception) {
+            Menu::alert(exception.what());
+        }
+        catch(const std::out_of_range& exception) {
+            Menu::alert(exception.what());
         }
     }
 }

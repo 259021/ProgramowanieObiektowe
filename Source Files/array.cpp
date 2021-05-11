@@ -28,7 +28,7 @@ float Array::divide(Identifier divisor, Identifier dividend) {
         return first / second;
     }
     else {
-        throw std::runtime_error("Math error: Attempted to divide by Zero\n");
+        throw std::runtime_error("Math alert: Attempted to divide by Zero\n");
     }
 }
 
@@ -36,7 +36,12 @@ float Array::multiplication(Identifier *identifiers, int length) {
     float multip = 0;
     for (int i = 0; i < length; i++) {
         float data = getNumberFromSheet(identifiers[i]);
-        multip *= data;
+        if (i == 0){
+            multip = data;
+        }
+        else{
+            multip *= data;
+        }
     }
     return multip;
 }
@@ -67,24 +72,23 @@ void Array::resizeSheet(int columns, int rows) {
             newSheet[i][j] = sheet[i][j];
         }
     }
+
     //delete old sheet from memory
+    /*
     for(int i = 0; i < sheetColumns; ++i) {
         delete [] sheet[i];
     }
     delete [] sheet;
+    */
     // change sheets
     sheet = newSheet;
+    sheetColumns = columns;
+    sheetRows = rows;
 }
 
 float Array::getNumberFromSheet(Identifier identifier) {
     checkIdentifier(identifier);
-    float val;
-    try {
-        val = sheet[identifier.Column][identifier.Row];
-    } catch(std::exception & exception) {
-        return 0;
-    }
-    return val;
+    return sheet[identifier.Column][identifier.Row];
 }
 using namespace std;
 void Array::saveDataToFile() {
