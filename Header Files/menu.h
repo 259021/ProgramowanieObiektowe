@@ -1,13 +1,55 @@
+#ifndef OWNEXCEL_MENU_H
 #define OWNEXCEL_MENU_H
-#include <iostream>
+#include "iostream"
+#include <cstdio>
+#include <termios.h>
+#include <unistd.h>
 #include "../Models/Identifier.h"
 
+    /**
+   * \brief This is a enum that hold response from user.
+   */
 enum Operations {sum, subtraction ,divide ,multiplication ,resize ,exitCode ,changeValue ,noAction, average, load, save};
 
+   /**
+   * \brief This is a class handling menu operations
+   */
 class Menu {
 public:
-    Operations showFunctions();
-    Identifier getCell();
-    int HowManyCells();
-    Identifier WhereToSave();
+    /**
+     * \brief func that get from user selected operation.
+     * @return return operation enum
+     */
+    static Operations showFunctions();
+    /**
+     * \brief func that get cell identifier from user.
+     * @param[in] message - message to user.
+     * @return return Identifier of cell
+     */
+    static Identifier getIdentifier(const std::string& message);
+    /**
+    * \brief func that get number from user.
+    * @param[in] message - message to user.
+    * @return return float value
+    */
+    static float getNumber(const std::string& message);
+    /**
+    * \brief func that send message to user.
+    * @param[in] message - message to user.
+    * @return return void
+    */
+    static void message(const std::string& message);
+    /**
+    * \brief func that send error message to user.
+    * @param[in] message - message to user.
+    * @return return void
+    */
+    static void error(const std::string& message);
+    /**
+    * \brief func that getch char without waiting for enter
+    * source: https://cboard.cprogramming.com/faq-board/27714-faq-there-getch-conio-equivalent-linux-unix.html
+    * @return return int value of char
+    */
+    static int getch();
 };
+#endif

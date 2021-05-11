@@ -1,3 +1,4 @@
+#ifndef OWNEXCEL_ARRAY_H
 #define OWNEXCEL_ARRAY_H
 
 #include "../Models/Identifier.h"
@@ -130,6 +131,8 @@ public:
      */
     void loadDataFromFile();
 
+    float getMaxValue();
+
 private:
     /**
      * func that check if identifier isn't out of bounds.
@@ -138,3 +141,4 @@ private:
      */
     void checkIdentifier(Identifier identifier);
 };
+#endif

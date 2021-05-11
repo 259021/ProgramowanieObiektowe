@@ -1,0 +1,104 @@
+//
+// Created by osboxes on 5/11/21.
+//
+
+#include "operation_handler.h"
+
+int OperationHandler::decimalOperation(Operations operation, Array *arr) {
+    switch (operation) {
+        case sum: {
+            int count = (int)Menu::getNumber("How many cells you want to use?");
+            std::vector<Identifier> cells;
+            auto it = cells.begin();
+            for (int i = 0; i < count; ++i) {
+                Identifier cell = Menu::getIdentifier("Which cell dou you want to select to sum operation? ");
+                cells.push_back(cell);
+                it++;
+            }
+
+            float sum = arr->sum(cells.data(), count);
+            Identifier destination = Menu::getIdentifier("Where do you want to save result?");
+            arr->changeValue(destination, sum);
+            arr->saveDataToFile();
+            break;
+        }
+        case subtraction: {
+            Identifier minued = Menu::getIdentifier("select minued cell: ");
+            Identifier subtrahend = Menu::getIdentifier("Select subtrahend cell: ");
+            float value = arr->subtract(minued, subtrahend);
+            Identifier destination = Menu::getIdentifier("Where do you want to save result?");
+            arr->changeValue(destination, value);
+            arr->saveDataToFile();
+            break;
+        }
+        case multiplication:{
+            int count = (int)Menu::getNumber("How many cells you want to use?");
+            std::vector<Identifier> cells;
+            auto it = cells.begin();
+            for (int i = 0; i < count; ++i) {
+                Identifier cell = Menu::getIdentifier("Which cell dou you want to select to multiplication operation?");
+                cells.push_back(cell);
+                it++;
+            }
+
+            float sum = arr->multiplication(cells.data(), count);
+            Identifier destination = Menu::getIdentifier("Where do you want to save result?\n");
+            arr->changeValue(destination, sum);
+            arr->saveDataToFile();
+            break;
+        }
+        case divide:{
+            Identifier divisor = Menu::getIdentifier("select divide cell: ");
+            Identifier dividend = Menu::getIdentifier("Select dividend cell: ");
+            float value = arr->divide(divisor, dividend);
+            Identifier destination = Menu::getIdentifier("Where do you want to save result?");
+            arr->changeValue(destination, value);
+            arr->saveDataToFile();
+            break;
+        }
+        case resize:{
+            Identifier size = Menu::getIdentifier("Pass size of your new sheet. ");
+            arr->resizeSheet(size.Column, size.Row);
+            break;
+        }
+        case average:{
+            int count = (int)Menu::getNumber("How many cells you want to use?");
+            std::vector<Identifier> cells;
+            auto it = cells.begin();
+            for (int i = 0; i < count; ++i) {
+                Identifier cell = Menu::getIdentifier("Which cell dou you want to select to average operation? ");
+                cells.push_back(cell);
+                it++;
+            }
+
+            float sum = arr->average(cells.data(), count);
+            Identifier destination = Menu::getIdentifier("Where do you want to save result?");
+            arr->changeValue(destination, sum);
+            arr->saveDataToFile();
+            break;
+        }
+        case save: {
+            arr->saveDataToFile();
+            break;
+        }
+        case load: {
+            arr->loadDataFromFile();
+            break;
+        }
+        case changeValue: {
+            Identifier destination = Menu::getIdentifier("Which cell value you want to change?");
+            float value = Menu::getNumber("Pass new value.");
+            arr->changeValue(destination, value);
+            break;
+        }
+        case noAction: {
+            Menu::error("No proper action selected!");
+            break;
+        }
+        case exitCode: {
+            return -1;
+            break;
+        }
+    }
+    return 0;
+}

@@ -149,4 +149,21 @@ std::string Array::getNumberAsString(Identifier identifier) {
     return stream.str();
 }
 
+float Array::getMaxValue() {
+    float max;
+    for(int i = 1; i <= sheetRows; ++i) {
+        for(int x = 1; x <= sheetColumns; ++x) {
+            Identifier id = Identifier(x, i);
+            float value = getNumberFromSheet(id);
+            if(i == 1 && x == 1) {
+                max = value;
+            }
+            if (max < value) {
+                max = value;
+            }
+        };
+        return max;
+    }
+}
+
 
