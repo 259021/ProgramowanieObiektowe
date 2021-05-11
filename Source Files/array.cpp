@@ -61,6 +61,7 @@ void Array::changeValue(Identifier identifier, float value) {
 }
 
 void Array::resizeSheet(int columns, int rows) {
+    //TODO: Resize doesnt work
     //create new Sheet
     float** newSheet = new float*[columns];
     for(int i = 0; i < columns; i++) {
@@ -74,12 +75,12 @@ void Array::resizeSheet(int columns, int rows) {
     }
 
     //delete old sheet from memory
-    /*
+
     for(int i = 0; i < sheetColumns; ++i) {
         delete [] sheet[i];
     }
     delete [] sheet;
-    */
+
     // change sheets
     sheet = newSheet;
     sheetColumns = columns;
