@@ -6,6 +6,7 @@
 #include "iostream"
 #include "sstream"
 #include <iomanip>
+#include <cstdlib>
     /**
      * \brief This is a class handling all operations on sheet.
      */

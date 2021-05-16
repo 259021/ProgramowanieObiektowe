@@ -5,7 +5,7 @@
 
 int main() {
     //MARK: - Create instances of classes -
-    Array arr = Array();
+    Array arr = Array(5,5);
     ArrayDisplay sheet = ArrayDisplay();
     int exit = 0;
 
