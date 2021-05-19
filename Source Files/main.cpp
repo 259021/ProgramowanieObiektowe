@@ -4,8 +4,8 @@
 
 int main() {
     //MARK: - Create instances of classes -
-    Array arr = Array(5,5);
-    ArrayDisplay sheet = ArrayDisplay();
+    static Array arr = Array(5, 5);
+    static ArrayDisplay sheet = ArrayDisplay();
 
     int exit = 0;
 
@@ -22,7 +22,7 @@ int main() {
     //MARK: - Main loop -
     while(exit != -1) {
         Menu::clear();
-        sheet.Display(arr);
+        sheet.Display(&arr);
         Operations operation = Menu::showFunctions();
         try {
             exit = OperationHandler::decimalOperation(operation, &arr);

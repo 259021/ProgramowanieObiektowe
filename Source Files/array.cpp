@@ -66,20 +66,56 @@ void Array::resizeSheet(int columns, int rows) {
         newSheet[i] = new Cell[rows];
     }
     //Pass data
-    for(int i = 0; i < sheetColumns; ++i) {
-        for(int j = 0; j < sheetRows; ++j) {
-            newSheet[i][j] = sheet[i][j];
+
+    for(int i = 0; i < columns; ++i) {
+        for(int j = 0; j < rows; ++j) {
+            newSheet[i][j] = DecimalCell("0");
         }
     }
+
+    if(columns > sheetColumns && rows > sheetRows) {
+        for(int i = 0; i < sheetColumns; ++i) {
+            for(int j = 0; j < sheetRows; ++j) {
+                newSheet[i][j] = sheet[i][j];
+            }
+        }
+    }
+    if (columns > sheetColumns & rows < sheetRows) {
+        for(int i = 0; i < sheetColumns; ++i) {
+            for(int j = 0; j < rows; ++j) {
+                newSheet[i][j] = sheet[i][j];
+            }
+        }
+    }
+    if (columns < sheetColumns & rows > sheetRows) {
+        for(int i = 0; i < columns; ++i) {
+            for(int j = 0; j < sheetRows; ++j) {
+                newSheet[i][j] = sheet[i][j];
+            }
+        }
+    }
+
+    if(columns < sheetColumns & rows < sheetRows) {
+        for(int i = 0; i < columns; ++i) {
+            for(int j = 0; j < rows; ++j) {
+                newSheet[i][j] = sheet[i][j];
+            }
+        }
+    }
+
+
+
     //delete old sheet from memory
     for(int i = 0; i < sheetColumns; ++i) {
         delete [] sheet[i];
     }
     delete [] sheet;
+
     // change sheets
-    sheet = newSheet;
     sheetColumns = columns;
     sheetRows = rows;
+    sheet = newSheet;
+
 }
 
 float Array::getNumberFromSheet(Identifier identifier) {

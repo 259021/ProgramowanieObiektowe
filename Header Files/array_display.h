@@ -15,7 +15,7 @@ public:
      * @param[in] Array - 2D array that holds sheet.
      * @return - void or exception
      */
-    void Display(Array arr);
+    void Display(Array *arr);
 
     template <typename T>
     std::string to_string_with_precision(const T a_value, const int n = 6);

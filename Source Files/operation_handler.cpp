@@ -4,6 +4,7 @@
 
 #include "operation_handler.h"
 
+
 int OperationHandler::decimalOperation(Operations operation, Array *arr) {
     switch (operation) {
         case sum: {
@@ -62,7 +63,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
         }
         case resize:{
             Identifier size = Menu::getIdentifier("Pass size of your new sheet. ");
-            arr->resizeSheet(size.Column, size.Row);
+            arr->resizeSheet(size.Column + 1, size.Row + 1);
             break;
         }
         case average:{
