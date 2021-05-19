@@ -1,10 +1,7 @@
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include "array.h"
-
-int columns;
-int rows;
-Cell** sheet;
 
 float Array::sum(Identifier *identifiers, int length) {
     float sum = 0;
@@ -57,7 +54,7 @@ float Array::average(Identifier *identifiers, int length) {
 
 void Array::changeValue(Identifier identifier, Cell value) {
         checkIdentifier(identifier);
-        sheet[identifier.Column][identifier.Row] = value;
+        sheet[identifier.Column][identifier.Row] = std::move(value);
 }
 
 void Array::resizeSheet(int columns, int rows) {
@@ -72,7 +69,6 @@ void Array::resizeSheet(int columns, int rows) {
             newSheet[i][j] = DecimalCell("0");
         }
     }
-
     if(columns > sheetColumns && rows > sheetRows) {
         for(int i = 0; i < sheetColumns; ++i) {
             for(int j = 0; j < sheetRows; ++j) {
@@ -94,7 +90,6 @@ void Array::resizeSheet(int columns, int rows) {
             }
         }
     }
-
     if(columns < sheetColumns & rows < sheetRows) {
         for(int i = 0; i < columns; ++i) {
             for(int j = 0; j < rows; ++j) {
@@ -102,9 +97,6 @@ void Array::resizeSheet(int columns, int rows) {
             }
         }
     }
-
-
-
     //delete old sheet from memory
     for(int i = 0; i < sheetColumns; ++i) {
         delete [] sheet[i];
@@ -173,7 +165,7 @@ void Array::loadDataFromFile() {
     }
 }
 
-void Array::checkIdentifier(Identifier identifier) {
+void Array::checkIdentifier(Identifier identifier) const {
     if (identifier.Column > sheetColumns && identifier.Row > sheetRows) {
         throw std::out_of_range(std::string("There is no cell at [" +
                                             std::to_string(identifier.Column) +
@@ -189,13 +181,6 @@ int Array::rows() const {
     return sheetRows;
 }
 
-std::string Array::getNumberAsString(Identifier identifier) {
-    float val = (getNumberFromSheet(identifier));
-    std::stringstream stream;
-    stream << std::fixed << std::setprecision(2) << val;
-    return stream.str();
-}
-
 int Array::getMaxLengthValue(int precision) {
     int max;
     string valueString;
@@ -204,7 +189,6 @@ int Array::getMaxLengthValue(int precision) {
             Identifier id = Identifier(x, i);
             if (sheet[id.Column][id.Row].areDecimalOperationsAllowed){
                 valueString = to_string_with_precision(getNumberFromSheet(id), precision);
-                //valueString = getStringFromSheet(id);
             }
             else {
                 valueString = getStringFromSheet(id);
@@ -216,7 +200,7 @@ int Array::getMaxLengthValue(int precision) {
             if (max < value) {
                 max = value;
             }
-        };
+        }
         return max;
     }
 }

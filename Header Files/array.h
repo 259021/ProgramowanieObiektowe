@@ -60,7 +60,7 @@ public:
         //pass test data
         for(int i = 0; i < sheetColumns; ++i)
             for(int j = 0; j < sheetRows; ++j)
-                sheet[i][j] = Cell(i,j,true);
+                sheet[i][j] = Cell(true);
     }
 
     /**
@@ -73,11 +73,6 @@ public:
      * @return number of rows
      */
     int rows() const;
-    /**
-     *
-     * @return numbers in sheet in single dimension array of chars
-     */
-    char* sheetAsChars();
     /**
      * \brief func that return sum of values depends on each one position in sheet and returns result.
      * @param[in] identifiers - array that holds position of cells.
@@ -140,13 +135,6 @@ public:
      * @return return string or exception
      */
     std::string getStringFromSheet(Identifier identifier);
-
-    /**
-     *
-     * @param identifier - position of cell that value func gonna return.
-     * @return number as string value
-     */
-    std::string getNumberAsString(Identifier identifier);
     /**
      * \brief func that save data from array to file (NOT IMPLEMENTED)
      * @return - nothing
@@ -164,6 +152,12 @@ public:
      */
     int getMaxLengthValue(int precision);
 
+    /**
+     * func search max value stored in sheet.
+     * @param n - precision to round off
+     * @param a_value - value to round off
+     * @return - rounded value as string
+     */
     template <typename T>
     std::string to_string_with_precision(const T a_value, const int n);
 private:
@@ -172,7 +166,7 @@ private:
      * @param identifier - holds cell position.
      * @return - nothing or exception
      */
-    void checkIdentifier(Identifier identifier);
+    void checkIdentifier(Identifier identifier) const;
 
 
 };

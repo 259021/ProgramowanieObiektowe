@@ -6,7 +6,6 @@
 
 #include <utility>
 
-
 void Cell::changeValue(std::string value) {
     Value = std::move(value);
 }

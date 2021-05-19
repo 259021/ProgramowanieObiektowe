@@ -17,6 +17,12 @@ public:
      */
     void Display(Array *arr);
 
+    /**
+      * func search max value stored in sheet.
+      * @param n - precision to round off
+      * @param a_value - value to round off
+      * @return - rounded value as string
+      */
     template <typename T>
     std::string to_string_with_precision(const T a_value, const int n = 6);
 };
