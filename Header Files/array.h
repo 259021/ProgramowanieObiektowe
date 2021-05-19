@@ -2,6 +2,8 @@
 #define OWNEXCEL_ARRAY_H
 
 #include "../Models/Identifier.h"
+#include "../Models/DecimalCell.h"
+#include "../Models/TextCell.h"
 #include "fstream"
 #include "iostream"
 #include "sstream"
@@ -23,7 +25,7 @@ private:
     /**
      * \param this variable store sheet using float array of arrays
      */
-    float** sheet;
+    Cell** sheet;
 public:
     /**
      * \brief Constructor of class
@@ -34,40 +36,43 @@ public:
     Array(int columns, int rows){
         sheetColumns = columns;
         sheetRows = rows;
-        sheet = new float*[columns];
+        sheet = new Cell*[columns];
         for(int i = 0; i < columns; i++) {
-            sheet[i] = new float[rows];
-        }
+            sheet[i] = new Cell[rows];
+    }
 
         //pass test data
         for(int i = 0; i < columns; ++i)
-            for(int j = 0; j < rows; ++j)
-                sheet[i][j] = 0;
+            for(int j = 0; j < rows; ++j) {
+                DecimalCell cell = DecimalCell("0");
+                sheet[i][j] = cell;
+            }
+
     }
     Array(){
         sheetColumns = 4;
         sheetRows = 4;
-        sheet = new float*[sheetColumns];
+        sheet = new Cell*[sheetColumns];
         for(int i = 0; i < sheetColumns; i++) {
-            sheet[i] = new float[sheetRows];
+            sheet[i] = new Cell[sheetRows];
         }
 
         //pass test data
         for(int i = 0; i < sheetColumns; ++i)
             for(int j = 0; j < sheetRows; ++j)
-                sheet[i][j] = 0;
+                sheet[i][j] = Cell(i,j,true);
     }
 
     /**
      *
      * @return numbers of columns
      */
-    int columns();
+    int columns() const;
     /**
      *
      * @return number of rows
      */
-    int rows();
+    int rows() const;
     /**
      *
      * @return numbers in sheet in single dimension array of chars
@@ -114,7 +119,7 @@ public:
      * @param[in] value - float value to write up.
      * @return - nothing or exception
      */
-    void changeValue(Identifier identifier, float value);
+    void changeValue(Identifier identifier, Cell value);
     /**
      * \brief func that resize sheet with no data lose.
      * @param[in] columns - new numbers of columns in sheet.
@@ -125,9 +130,17 @@ public:
     /**
      * \brief func that return single value from sheet depends on it position.
      * @param identifier - position of cell that value func gonna return.
-     * @return return nothing or exception
+     * @return return float or exception
      */
     float getNumberFromSheet(Identifier identifier);
+    Cell getCellFromSheet(Identifier identifier);
+    /**
+     * \brief func that return single value from sheet depends on it position.
+     * @param identifier - position of cell that value func gonna return.
+     * @return return string or exception
+     */
+    std::string getStringFromSheet(Identifier identifier);
+
     /**
      *
      * @param identifier - position of cell that value func gonna return.
@@ -146,10 +159,13 @@ public:
     void loadDataFromFile();
      /**
      * func search max value stored in sheet.
+     * @param precision - precision to round off
      * @return - max value as float
      */
-    float getMaxValue();
+    int getMaxLengthValue(int precision);
 
+    template <typename T>
+    std::string to_string_with_precision(const T a_value, const int n);
 private:
     /**
      * func that check if identifier isn't out of bounds.
@@ -157,5 +173,7 @@ private:
      * @return - nothing or exception
      */
     void checkIdentifier(Identifier identifier);
+
+
 };
 #endif

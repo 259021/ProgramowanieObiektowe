@@ -63,6 +63,23 @@ float Menu::getNumber(const string& message) {
     return count;
 }
 
+Cell Menu::getCell(const string& message) {
+    string value = "0";
+
+        cout << message << endl;
+        try {
+            cout << "count: ";
+            cin >> value;
+            float test = stof(value);
+            DecimalCell cell = DecimalCell(value);
+            return cell;
+        }
+        catch(...) {
+            TextCell cell = TextCell(value);
+            return cell;
+        };
+}
+
 Identifier Menu::getIdentifier(const string& message) {
     int col = 1;
     int row = 1;

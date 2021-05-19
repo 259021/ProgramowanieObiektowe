@@ -4,7 +4,7 @@
 
 int columns;
 int rows;
-float** sheet;
+Cell** sheet;
 
 float Array::sum(Identifier *identifiers, int length) {
     float sum = 0;
@@ -55,16 +55,15 @@ float Array::average(Identifier *identifiers, int length) {
     return sum / length;
 }
 
-void Array::changeValue(Identifier identifier, float value) {
+void Array::changeValue(Identifier identifier, Cell value) {
         checkIdentifier(identifier);
         sheet[identifier.Column][identifier.Row] = value;
 }
 
 void Array::resizeSheet(int columns, int rows) {
-    //TODO: Resize doesnt work
-    float** newSheet = new float*[columns];
+    Cell** newSheet = new Cell*[columns];
     for(int i = 0; i < columns; i++) {
-        newSheet[i] = new float[rows];
+        newSheet[i] = new Cell[rows];
     }
     //Pass data
     for(int i = 0; i < sheetColumns; ++i) {
@@ -81,13 +80,23 @@ void Array::resizeSheet(int columns, int rows) {
     sheet = newSheet;
     sheetColumns = columns;
     sheetRows = rows;
-
 }
 
 float Array::getNumberFromSheet(Identifier identifier) {
     checkIdentifier(identifier);
+    if (sheet[identifier.Column][identifier.Row].areDecimalOperationsAllowed) {
+        return sheet[identifier.Column][identifier.Row].getDecimalValue();
+    }
+    else {
+        throw std::runtime_error("Cannot use text values in math operations");
+    }
+}
+
+Cell Array::getCellFromSheet(Identifier identifier) {
+    checkIdentifier(identifier);
     return sheet[identifier.Column][identifier.Row];
 }
+
 using namespace std;
 void Array::saveDataToFile() {
     std::ofstream save("array.txt");
@@ -96,7 +105,7 @@ void Array::saveDataToFile() {
     for(int i = 1; i <= sheetRows; ++i) {
         for(int x = 1; x <= sheetColumns; ++x) {
             Identifier id = Identifier(x, i);
-            save << to_string(getNumberFromSheet(id)) << " ";
+            save << getCellFromSheet(id).getValue() << " ";
         }
         save << endl;
     }
@@ -121,7 +130,7 @@ void Array::loadDataFromFile() {
             for (int x = 0; x < columns; x++){
                 string val;
                 iss >> val;
-                sheet[x][i-2] = stof(val);
+                sheet[x][i-2].changeValue(val);
             }
         }
         i++;
@@ -136,11 +145,11 @@ void Array::checkIdentifier(Identifier identifier) {
     }
 }
 
-int Array::columns() {
+int Array::columns() const {
     return sheetColumns;
 }
 
-int Array::rows() {
+int Array::rows() const {
     return sheetRows;
 }
 
@@ -151,12 +160,20 @@ std::string Array::getNumberAsString(Identifier identifier) {
     return stream.str();
 }
 
-float Array::getMaxValue() {
-    float max;
+int Array::getMaxLengthValue(int precision) {
+    int max;
+    string valueString;
     for(int i = 1; i <= sheetRows; ++i) {
         for(int x = 1; x <= sheetColumns; ++x) {
             Identifier id = Identifier(x, i);
-            float value = getNumberFromSheet(id);
+            if (sheet[id.Column][id.Row].areDecimalOperationsAllowed){
+                valueString = to_string_with_precision(getNumberFromSheet(id), precision);
+                //valueString = getStringFromSheet(id);
+            }
+            else {
+                valueString = getStringFromSheet(id);
+            }
+            int value = valueString.length();
             if(i == 1 && x == 1) {
                 max = value;
             }
@@ -166,6 +183,19 @@ float Array::getMaxValue() {
         };
         return max;
     }
+}
+
+template <typename T>
+std::string Array::to_string_with_precision(const T a_value, const int n)
+{
+    std::ostringstream out;
+    out.precision(n);
+    out << std::fixed << a_value;
+    return out.str();
+}
+
+std::string Array::getStringFromSheet(Identifier identifier) {
+    return sheet[identifier.Column][identifier.Row].getValue();
 }
 
 

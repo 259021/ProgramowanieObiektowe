@@ -5,7 +5,9 @@
 #include <termios.h>
 #include <unistd.h>
 #include "../Models/Identifier.h"
-
+#include "../Models/Cell.h"
+#include "../Models/DecimalCell.h"
+#include "../Models/TextCell.h"
     /**
    * \brief This is a enum that hold response from user.
    */
@@ -33,6 +35,14 @@ public:
     * @return return float value
     */
     static float getNumber(const std::string& message);
+
+    /**
+    * \brief func that get string from user.
+    * @param[in] message - message to user.
+    * @return return float value
+    */
+    static Cell getCell(const std::string& message);
+
     /**
     * \brief func that send message to user.
     * @param[in] message - message to user.

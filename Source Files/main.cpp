@@ -2,11 +2,11 @@
 #include "array_display.h"
 #include "operation_handler.h"
 
-
 int main() {
     //MARK: - Create instances of classes -
     Array arr = Array(5,5);
     ArrayDisplay sheet = ArrayDisplay();
+
     int exit = 0;
 
     //MARK: - Prepare sheet -

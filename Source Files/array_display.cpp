@@ -4,8 +4,8 @@ using namespace std;
 
 void ArrayDisplay::Display(Array arr) {
     int precision = 2;
-    string max = to_string_with_precision(arr.getMaxValue(), precision);
-    int cellWidth = (max.length() + 4);
+    int max = arr.getMaxLengthValue(precision);
+    int cellWidth = (max + 4);
 
     for (int j = 0; j <= cellWidth*arr.columns()*1.35; ++j) {
         cout << "―";
@@ -29,7 +29,14 @@ void ArrayDisplay::Display(Array arr) {
 
             if(i != 0 && x!=0){
                 Identifier id = Identifier(x, i);
-                string value = to_string_with_precision(arr.getNumberFromSheet(id), precision);
+                Cell cell = arr.getCellFromSheet(id);
+                string value;
+                if(cell.areDecimalOperationsAllowed) {
+                    value = to_string_with_precision(cell.getDecimalValue(), precision);
+                } else {
+                    value = cell.getValue();
+                }
+
                 if (x != arr.columns()){
                     cout << "│" << setw(cellWidth) << value << setw(cellWidth/2);
                 }
