@@ -29,7 +29,7 @@ public:
     /**
     * \param this variable tells us if this concrete cell holds decimal value or text value
     */
-    bool areDecimalOperationsAllowed{};
+    bool areDecimalOperationsAllowed;
     /**
      * func that change value
      * @param value - param that hold value

@@ -1,5 +1,5 @@
 #include <menu.h>
-
+#include "unistd.h"
 
 using namespace std;
 
@@ -16,8 +16,11 @@ Operations Menu::showFunctions() {
     cout << "Press \'r\' to resize sheet\n";;
     cout << "Press \'e\' exit";
     cout << endl;
-
+#ifdef __APPLE__
+    int c = cin.get();
+#else
     int c = getch();
+#endif
     switch (c) {
         case '+':
             return  Operations::sum;
@@ -110,10 +113,12 @@ void Menu::alert(const string& message) {
     cout << "\033[1;31m" << message << "\033[0m\n";
     sleep(2);
 }
+
+#ifdef __APPLE__
+#else
 int Menu::getch() {
-        struct termios oldt{},
-                newt{};
-        int            ch;
+    struct termios oldt{}, newt{};
+        int ch;
         tcgetattr( STDIN_FILENO, &oldt );
         newt = oldt;
         newt.c_lflag &= ~( ICANON | ECHO );
@@ -121,7 +126,9 @@ int Menu::getch() {
         ch = getchar();
         tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
         return ch;
+
 }
+#endif
 
 
 void Menu::clear() {
