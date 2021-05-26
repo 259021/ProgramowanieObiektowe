@@ -19,8 +19,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
 
             float sum = arr->sum(cells.data(), count);
             Identifier destination = Menu::getIdentifier("Where do you want to save result?");
-            DecimalCell cell = DecimalCell(std::to_string(sum));
-            arr->changeValue(destination, cell);
+            arr->changeValue(destination, CellValue(sum));
             arr->saveDataToFile();
             break;
         }
@@ -29,8 +28,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
             Identifier subtrahend = Menu::getIdentifier("Select subtrahend cell: ");
             float value = arr->subtract(minued, subtrahend);
             Identifier destination = Menu::getIdentifier("Where do you want to save result?");
-            DecimalCell cell = DecimalCell(std::to_string(sum));
-            arr->changeValue(destination, cell);
+            arr->changeValue(destination, CellValue(sum));
             arr->saveDataToFile();
             break;
         }
@@ -46,8 +44,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
 
             float sum = arr->multiplication(cells.data(), count);
             Identifier destination = Menu::getIdentifier("Where do you want to save result?\n");
-            DecimalCell cell = DecimalCell(std::to_string(sum));
-            arr->changeValue(destination, cell);
+            arr->changeValue(destination, CellValue(sum));
             arr->saveDataToFile();
             break;
         }
@@ -56,8 +53,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
             Identifier dividend = Menu::getIdentifier("Select dividend cell: ");
             float value = arr->divide(divisor, dividend);
             Identifier destination = Menu::getIdentifier("Where do you want to save result?");
-            DecimalCell cell = DecimalCell(std::to_string(value));
-            arr->changeValue(destination, cell);
+            arr->changeValue(destination, CellValue(sum));
             arr->saveDataToFile();
             break;
         }
@@ -78,8 +74,7 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
 
             float sum = arr->average(cells.data(), count);
             Identifier destination = Menu::getIdentifier("Where do you want to save result?");
-            DecimalCell cell = DecimalCell(std::to_string(sum));
-            arr->changeValue(destination, cell);
+            arr->changeValue(destination, CellValue(sum));
             arr->saveDataToFile();
             break;
         }
@@ -95,12 +90,11 @@ int OperationHandler::decimalOperation(Operations operation, Array *arr) {
         }
         case changeValue: {
             Identifier destination = Menu::getIdentifier("Which cell value you want to change?");
-            Cell value = Menu::getCell("Pass new value.");
+            CellValue value = Menu::getCell("Pass new value.");
             arr->changeValue(destination, value);
             break;
         }
         case noAction: {
-            //Menu::alert("No proper action selected!");
             break;
         }
         case exitCode: {

@@ -41,7 +41,7 @@ public:
     * @param[in] message - message to user.
     * @return return float value
     */
-    static Cell getCell(const std::string& message);
+    static CellValue getCell(const std::string& message);
 
     /**
     * \brief func that send message to user.

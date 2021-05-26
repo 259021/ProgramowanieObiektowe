@@ -52,21 +52,26 @@ float Array::average(Identifier *identifiers, int length) {
     return sum / length;
 }
 
-void Array::changeValue(Identifier identifier, Cell value) {
+void Array::changeValue(Identifier identifier, CellValue value) {
         checkIdentifier(identifier);
-        sheet[identifier.Column][identifier.Row] = std::move(value);
+        if(value.areDecimalOperationsAllowed()){
+            sheet[identifier.Column][identifier.Row] = new DecimalCell(value.getDecimalValue());
+        } else {
+            sheet[identifier.Column][identifier.Row] = new TextCell(value.getTextValue());
+        }
+
 }
 
 void Array::resizeSheet(int columns, int rows) {
-    Cell** newSheet = new Cell*[columns];
+    Cell*** newSheet = new Cell **[columns];
     for(int i = 0; i < columns; i++) {
-        newSheet[i] = new Cell[rows];
+        newSheet[i] = new Cell*[rows];
     }
     //Pass data
 
     for(int i = 0; i < columns; ++i) {
         for(int j = 0; j < rows; ++j) {
-            newSheet[i][j] = DecimalCell("0");
+            newSheet[i][j] = new DecimalCell(0);
         }
     }
     if(columns > sheetColumns && rows > sheetRows) {
@@ -112,17 +117,17 @@ void Array::resizeSheet(int columns, int rows) {
 
 float Array::getNumberFromSheet(Identifier identifier) {
     checkIdentifier(identifier);
-    if (sheet[identifier.Column][identifier.Row].areDecimalOperationsAllowed) {
-        return sheet[identifier.Column][identifier.Row].getDecimalValue();
+    if (sheet[identifier.Column][identifier.Row]->getValue().areDecimalOperationsAllowed()) {
+        return sheet[identifier.Column][identifier.Row]->getValue().getDecimalValue();
     }
     else {
         throw std::runtime_error("Cannot use text values in math operations");
     }
 }
 
-Cell Array::getCellFromSheet(Identifier identifier) {
+CellValue Array::getCellFromSheet(Identifier identifier) {
     checkIdentifier(identifier);
-    return sheet[identifier.Column][identifier.Row];
+    return sheet[identifier.Column][identifier.Row]->getValue();
 }
 
 using namespace std;
@@ -133,7 +138,7 @@ void Array::saveDataToFile() {
     for(int i = 1; i <= sheetRows; ++i) {
         for(int x = 1; x <= sheetColumns; ++x) {
             Identifier id = Identifier(x, i);
-            save << getCellFromSheet(id).getValue() << " ";
+            save << getCellFromSheet(id).getTextValue() << " ";
         }
         save << endl;
     }
@@ -158,7 +163,7 @@ void Array::loadDataFromFile() {
             for (int x = 0; x < columns; x++){
                 string val;
                 iss >> val;
-                sheet[x][i-2].changeValue(val);
+                sheet[x][i-2]->changeValue(val);
             }
         }
         i++;
@@ -187,7 +192,7 @@ int Array::getMaxLengthValue(int precision) {
     for(int i = 1; i <= sheetRows; ++i) {
         for(int x = 1; x <= sheetColumns; ++x) {
             Identifier id = Identifier(x, i);
-            if (sheet[id.Column][id.Row].areDecimalOperationsAllowed){
+            if (sheet[id.Column][id.Row]->getValue().areDecimalOperationsAllowed()){
                 valueString = to_string_with_precision(getNumberFromSheet(id), precision);
             }
             else {
@@ -215,7 +220,7 @@ std::string Array::to_string_with_precision(const T a_value, const int n)
 }
 
 std::string Array::getStringFromSheet(Identifier identifier) {
-    return sheet[identifier.Column][identifier.Row].getValue();
+    return sheet[identifier.Column][identifier.Row]->getValue().getTextValue();
 }
 
 

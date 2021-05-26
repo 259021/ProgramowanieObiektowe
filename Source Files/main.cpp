@@ -25,7 +25,12 @@ int main() {
         sheet.Display(&arr);
         Operations operation = Menu::showFunctions();
         try {
-            exit = OperationHandler::decimalOperation(operation, &arr);
+            if(operation != Operations::noAction){
+                exit = OperationHandler::decimalOperation(operation, &arr);
+            }
+            else {
+                exit = 0;
+            }
         }
         catch(const std::exception& exception) {
             Menu::alert(exception.what());

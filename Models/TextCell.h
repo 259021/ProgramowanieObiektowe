@@ -7,10 +7,17 @@
 #include "Cell.h"
 
 class TextCell: public Cell {
+private:
+    CellValue value;
+
 public:
-    TextCell(std::string value) {
-        Cell::areDecimalOperationsAllowed = false;
-        Cell::Value = std::move(value);
+    void changeValue(float val) override;
+    void changeValue(std::string val) override;
+    CellValue getValue() override;
+    void changeValueCell(CellValue val) override;
+
+    explicit TextCell(const std::string& val) : value(val) {
+
     }
 };
 

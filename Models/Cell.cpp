@@ -1,7 +1,7 @@
 //
 // Created by osboxes on 5/18/21.
 //
-
+/*
 #include "Cell.h"
 
 #include <utility>
@@ -17,3 +17,4 @@ std::string Cell::getValue() {
 float Cell::getDecimalValue() {
     return std::stof(Cell::getValue());
 }
+*/

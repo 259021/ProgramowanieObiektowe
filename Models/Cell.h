@@ -5,6 +5,7 @@
 #ifndef OWNEXCEL_CELL_H
 #define OWNEXCEL_CELL_H
 #include "string"
+#include "CellValue.h"
 
 class Cell {
 /*
@@ -15,37 +16,40 @@ protected:
     /**
     * \param this variable holds value as string
     */
-    std::string Value;
-    /*
-
-    */
+    CellValue Value;
 public:
-    Cell(bool decimal){
-        areDecimalOperationsAllowed = decimal;
-    }
-    Cell(){
+
+    Cell(std::string val) : Value(val) {
 
     }
-    /**
-    * \param this variable tells us if this concrete cell holds decimal value or text value
-    */
-    bool areDecimalOperationsAllowed;
+    Cell(float val): Value(val) {
+
+    }
+
+    Cell(): Value(0) {
+
+    }
+
     /**
      * func that change value
      * @param value - param that hold value
      * @return - void
      */
-    virtual void changeValue(std::string value);
+    virtual void changeValue(std::string val) = 0;
+    /**
+     * func that change value
+     * @param value - param that hold value
+     * @return - void
+     */
+    virtual void changeValue(float val) = 0;
+
     /**
       * func that return value as string
       * @return - string value
       */
-    virtual std::string getValue();
-    /**
-     * func that return value as float
-     * @return - float value
-     */
-    virtual float getDecimalValue();
+    virtual CellValue getValue() = 0;
+
+    virtual void changeValueCell(CellValue val) = 0;
 };
 
 

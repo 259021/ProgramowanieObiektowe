@@ -4,6 +4,7 @@
 #include "../Models/Identifier.h"
 #include "../Models/DecimalCell.h"
 #include "../Models/TextCell.h"
+#include "../Models/CellValue.h"
 #include "fstream"
 #include "iostream"
 #include "sstream"
@@ -25,7 +26,7 @@ private:
     /**
      * \param this variable store sheet using float array of arrays
      */
-    Cell** sheet;
+    Cell*** sheet;
 public:
     /**
      * \brief Constructor of class
@@ -36,31 +37,30 @@ public:
     Array(int columns, int rows){
         sheetColumns = columns;
         sheetRows = rows;
-        sheet = new Cell*[columns];
+        sheet = new Cell **[columns];
         for(int i = 0; i < columns; i++) {
-            sheet[i] = new Cell[rows];
+            sheet[i] = new Cell* [rows];
     }
 
         //pass test data
         for(int i = 0; i < columns; ++i)
             for(int j = 0; j < rows; ++j) {
-                DecimalCell cell = DecimalCell("0");
-                sheet[i][j] = cell;
+                sheet[i][j] = new DecimalCell(0);
             }
 
     }
     Array(){
         sheetColumns = 4;
         sheetRows = 4;
-        sheet = new Cell*[sheetColumns];
+        sheet = new Cell **[sheetColumns];
         for(int i = 0; i < sheetColumns; i++) {
-            sheet[i] = new Cell[sheetRows];
+            sheet[i] = new Cell*[sheetRows];
         }
 
         //pass test data
         for(int i = 0; i < sheetColumns; ++i)
             for(int j = 0; j < sheetRows; ++j)
-                sheet[i][j] = Cell(true);
+                sheet[i][j] = new DecimalCell(0);
     }
 
     /**
@@ -114,7 +114,7 @@ public:
      * @param[in] value - float value to write up.
      * @return - nothing or exception
      */
-    void changeValue(Identifier identifier, Cell value);
+    void changeValue(Identifier identifier, CellValue value);
     /**
      * \brief func that resize sheet with no data lose.
      * @param[in] columns - new numbers of columns in sheet.
@@ -128,7 +128,7 @@ public:
      * @return return float or exception
      */
     float getNumberFromSheet(Identifier identifier);
-    Cell getCellFromSheet(Identifier identifier);
+    CellValue getCellFromSheet(Identifier identifier);
     /**
      * \brief func that return single value from sheet depends on it position.
      * @param identifier - position of cell that value func gonna return.

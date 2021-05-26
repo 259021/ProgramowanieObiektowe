@@ -29,12 +29,12 @@ void ArrayDisplay::Display(Array *arr) {
 
             if(i != 0 && x!=0){
                 Identifier id = Identifier(x, i);
-                Cell cell = arr->getCellFromSheet(id);
+                CellValue cell = arr->getCellFromSheet(id);
                 string value;
-                if(cell.areDecimalOperationsAllowed) {
+                if(cell.areDecimalOperationsAllowed()) {
                     value = to_string_with_precision(cell.getDecimalValue(), precision);
                 } else {
-                    value = cell.getValue();
+                    value = cell.getTextValue();
                 }
 
                 if (x != arr->columns()){

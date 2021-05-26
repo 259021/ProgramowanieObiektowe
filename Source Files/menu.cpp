@@ -16,7 +16,7 @@ Operations Menu::showFunctions() {
     cout << "Press \'e\' exit";
     cout << endl;
 #ifdef __APPLE__
-    int c = cin.get();
+    char c = cin.get();
 #else
     int c = getch();
 #endif
@@ -65,21 +65,19 @@ float Menu::getNumber(const string& message) {
     return count;
 }
 
-Cell Menu::getCell(const string& message) {
+CellValue Menu::getCell(const string& message) {
     string value = "0";
-
         cout << message << endl;
         try {
             cout << "count: ";
             cin >> value;
-            float test = stof(value);
-            DecimalCell cell = DecimalCell(value);
-            return cell;
+            float decimal = stof(value);
+            return CellValue(decimal);
         }
         catch(...) {
-            TextCell cell = TextCell(value);
-            return cell;
-        };
+            return CellValue(value);
+        }
+
 }
 
 Identifier Menu::getIdentifier(const string& message) {
