@@ -24,8 +24,6 @@ public:
     DecimalCell(): value(0) {
 
     };
-
-    void changeValueCell(CellValue val) override;
 };
 
 #endif //OWNEXCEL_DECIMALCELL_H

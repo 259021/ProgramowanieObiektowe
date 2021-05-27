@@ -16,6 +16,4 @@ void DecimalCell::changeValue(std::string value) {
     //MARK: - Not implemented -
 }
 
-void DecimalCell::changeValueCell(CellValue val) {
-    value = val;
-}
+

@@ -16,6 +16,3 @@ void TextCell::changeValue(float val) {
     //MARK: - Not implemented -
 }
 
-void TextCell::changeValueCell(CellValue val) {
-    value = val;
-}

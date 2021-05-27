@@ -14,7 +14,6 @@ public:
     void changeValue(float val) override;
     void changeValue(std::string val) override;
     CellValue getValue() override;
-    void changeValueCell(CellValue val) override;
 
     explicit TextCell(const std::string& val) : value(val) {
 
