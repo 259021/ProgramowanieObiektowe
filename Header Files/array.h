@@ -35,8 +35,14 @@ public:
      * Construction also configure columns and rows properties.
      */
     Array(int columns, int rows){
-        sheetColumns = columns;
-        sheetRows = rows;
+        if (columns != 0 || rows != 0) {
+            sheetColumns = columns;
+            sheetRows = rows;
+        } else {
+            sheetColumns = 8;
+            sheetRows = 12;
+        }
+
         sheet = new Cell **[columns];
         for(int i = 0; i < columns; i++) {
             sheet[i] = new Cell* [rows];

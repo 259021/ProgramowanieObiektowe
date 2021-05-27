@@ -163,7 +163,14 @@ void Array::loadDataFromFile() {
             for (int x = 0; x < columns; x++){
                 string val;
                 iss >> val;
-                sheet[x][i-2]->changeValue(val);
+                try {
+                    float value = stof(val);
+                    sheet[x][i-2] = new DecimalCell(value);
+                }
+                catch(...){
+                    sheet[x][i-2] = new TextCell(val);
+                }
+                //sheet[x][i-2]->changeValue(val);
             }
         }
         i++;

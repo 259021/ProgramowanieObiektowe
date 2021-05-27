@@ -92,10 +92,12 @@ Identifier Menu::getIdentifier(const string& message) {
             cout << "row: ";
             cin >> row;
             properValue = true;
+            break;
         }
         catch(...) {
-            cout << "Write proper cell value!";
+            alert("Write proper cell value!");
             properValue = false;
+            break;
         };
     }
     Identifier id = Identifier(col, row);
