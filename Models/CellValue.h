@@ -7,10 +7,19 @@
 
 
 #include "iostream"
-
+    /*
+    * /brief This model holds single cell value
+    *
+    */
 class CellValue{
 private:
+    /**
+    * \param this variable holds value as string
+    */
     std::string textValue;
+    /**
+    * \param this variable holds value as float
+    */
     float decimalValue;
 public:
     CellValue(float value){
@@ -25,8 +34,20 @@ public:
         textValue = nullptr;
     }
 
+    /**
+     * func check if Cell value is string or decimal
+     * @return - bool statement
+     */
     bool areDecimalOperationsAllowed();
+    /**
+     * func that return float type value
+     * @return - float value
+     */
     float getDecimalValue();
+    /**
+    * func that return string type value
+    * @return - string value
+    */
     std::string getTextValue();
 };
 

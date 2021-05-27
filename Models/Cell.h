@@ -8,13 +8,13 @@
 #include "CellValue.h"
 
 class Cell {
-/*
+    /*
      * /brief This model represent single cell in sheet
      *
      */
 protected:
     /**
-    * \param this variable holds value as string
+    * \param this variable holds value
     */
     CellValue Value;
 public:
@@ -44,12 +44,10 @@ public:
     virtual void changeValue(float val) = 0;
 
     /**
-      * func that return value as string
-      * @return - string value
+      * func that return value as CellValue
+      * @return - CellValue
       */
     virtual CellValue getValue() = 0;
-
-    virtual void changeValueCell(CellValue val) = 0;
 };
 
 
