@@ -13,12 +13,11 @@ private:
     CellValue value;
 
 public:
-    void changeValue(std::string value) override;
-    void changeValue(float val) override;
+    void changeValue(std::string val) override;
     CellValue getValue() override;
 
+    explicit DecimalCell(float val) : value(val) {
 
-    DecimalCell(float val) : value(val) {
     }
 
     DecimalCell(): value(0) {

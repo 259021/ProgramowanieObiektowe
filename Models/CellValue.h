@@ -34,7 +34,6 @@ public:
         decimalValue = 0;
         textValue = nullptr;
     }
-
     /**
      * func check if Cell value is string or decimal
      * @return - bool statement
@@ -51,6 +50,5 @@ public:
     */
     std::string getTextValue();
 };
-
 
 #endif //OWNEXCEL_CELLVALUE_H

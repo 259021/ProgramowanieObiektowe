@@ -12,7 +12,4 @@ CellValue TextCell::getValue() {
     return value;
 }
 
-void TextCell::changeValue(float val) {
-    //MARK: - Not implemented -
-}
 

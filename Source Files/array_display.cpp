@@ -53,7 +53,6 @@ void ArrayDisplay::Display(Array *arr) {
     }
 }
 
-
 template <typename T>
 std::string ArrayDisplay::to_string_with_precision(const T a_value, const int n)
 {

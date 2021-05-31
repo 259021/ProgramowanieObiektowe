@@ -25,5 +25,4 @@ std::string CellValue::getTextValue() {
     } else {
       return std::to_string(decimalValue);
     }
-
 }

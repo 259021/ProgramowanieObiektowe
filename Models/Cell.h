@@ -18,18 +18,10 @@ protected:
     */
     CellValue Value;
 public:
-
-    Cell(std::string val) : Value(val) {
-
-    }
-    Cell(float val): Value(val) {
-
-    }
-
+    
     Cell(): Value(0) {
 
     }
-
     /**
      * func that change value
      * @param value - param that hold value
@@ -41,16 +33,8 @@ public:
      * @param value - param that hold value
      * @return - void
      */
-    virtual void changeValue(float val) = 0;
-
-    /**
-      * func that return value as CellValue
-      * @return - CellValue
-      */
     virtual CellValue getValue() = 0;
 };
-
-
 
 
 #endif //OWNEXCEL_CELL_H

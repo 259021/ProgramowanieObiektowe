@@ -11,7 +11,6 @@ private:
     CellValue value;
 
 public:
-    void changeValue(float val) override;
     void changeValue(std::string val) override;
     CellValue getValue() override;
 
