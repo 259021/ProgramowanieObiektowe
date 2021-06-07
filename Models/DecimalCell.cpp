@@ -11,5 +11,3 @@ CellValue DecimalCell::getValue() {
 void DecimalCell::changeValue(std::string val) {
     value = CellValue(std::stof(val));
 }
-
-

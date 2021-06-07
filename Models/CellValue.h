@@ -5,7 +5,6 @@
 #ifndef OWNEXCEL_CELLVALUE_H
 #define OWNEXCEL_CELLVALUE_H
 
-
 #include "iostream"
     /*
     * /brief This model holds single cell value

@@ -12,16 +12,7 @@ class Cell {
      * /brief This model represent single cell in sheet
      *
      */
-protected:
-    /**
-    * \param this variable holds value
-    */
-    CellValue Value;
 public:
-    
-    Cell(): Value(0) {
-
-    }
     /**
      * func that change value
      * @param value - param that hold value

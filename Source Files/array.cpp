@@ -59,7 +59,6 @@ void Array::changeValue(Identifier identifier, CellValue value) {
         } else {
             sheet[identifier.Column][identifier.Row] = new TextCell(value.getTextValue());
         }
-
 }
 
 void Array::resizeSheet(int columns, int rows) {
@@ -67,8 +66,7 @@ void Array::resizeSheet(int columns, int rows) {
     for(int i = 0; i < columns; i++) {
         newSheet[i] = new Cell*[rows];
     }
-    //Pass data
-
+    //MARK: - Pass Data -
     for(int i = 0; i < columns; ++i) {
         for(int j = 0; j < rows; ++j) {
             newSheet[i][j] = new DecimalCell(0);
@@ -170,7 +168,6 @@ void Array::loadDataFromFile() {
                 catch(...){
                     sheet[x][i-2] = new TextCell(val);
                 }
-                //sheet[x][i-2]->changeValue(val);
             }
         }
         i++;

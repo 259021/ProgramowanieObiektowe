@@ -6,7 +6,7 @@
 #define OWNEXCEL_IDENTIFIER_H
 
 
-class Identifier {
+struct Identifier {
     /*
      * /brief This model helps identifier position of single value in sheet.
      *

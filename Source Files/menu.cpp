@@ -129,7 +129,6 @@ int Menu::getch() {
 }
 #endif
 
-
 void Menu::clear() {
     system("clear");
 }

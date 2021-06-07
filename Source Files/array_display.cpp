@@ -42,7 +42,6 @@ void ArrayDisplay::Display(Array *arr) {
                 }
                 else {
                     cout << "│" << setw(cellWidth) << value << setw(cellWidth/2) << "│";
-
                 }
             }
         }
